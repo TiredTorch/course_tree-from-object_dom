@@ -23,29 +23,29 @@ const tree = document.querySelector('#tree');
 
 function createTree(element, data) {
 
-  createNewUl(element, data);
+  element.append(createNewUl(element, data));
 }
 
-const createNewUl = (root, curentElement) => {
+const createNewUl = (root, currentElement) => {
   const newUl = document.createElement('ul');
 
-  for (const key in curentElement) {
+  for (const key in currentElement) {
 
     const newLi = document.createElement('li');
 
     newLi.append(key);
-    newUl.append(newLi);
 
-    if (Object.keys(curentElement[key]).length !== 0){
+    if (Object.keys(currentElement[key]).length !== 0){
 
-      createNewUl(newUl, curentElement[key]);
+      newLi.append(createNewUl(newUl, currentElement[key]));
 
     }
+    newUl.append(newLi);
 
 
   }
 
-  root.append(newUl);
+  return newUl;
 
 };
 
